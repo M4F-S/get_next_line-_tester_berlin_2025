@@ -19,6 +19,6 @@ cc -Wall -Wextra -Werror -D BUFFER_SIZE=1 get_next_line.c get_next_line_utils.c 
 cc -Wall -Wextra -Werror -D BUFFER_SIZE=1000000 get_next_line.c get_next_line_utils.c main.c -o test_gnl
 ./test_gnl
 
-Memory Leak Check:
+# Memory Leak Check:
 
 valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ./test_gnl

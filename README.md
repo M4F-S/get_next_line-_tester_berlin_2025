@@ -6,19 +6,19 @@
 How to use.
 
 Complie & run:
-
-### Test with default BUFFER_SIZE (42)
-cc -Wall -Wextra -Werror -D BUFFER_SIZE=42 get_next_line.c get_next_line_utils.c main.c -o test_gnl
+# 1. Compile with different BUFFER_SIZES
+cc -Wall -Wextra -Werror -D BUFFER_SIZE=42 -g3 get_next_line.c get_next_line_utils.c main.c -o test_gnl
 ./test_gnl
 
-### Test with BUFFER_SIZE=1 (edge case)
-cc -Wall -Wextra -Werror -D BUFFER_SIZE=1 get_next_line.c get_next_line_utils.c main.c -o test_gnl
+cc -Wall -Wextra -Werror -D BUFFER_SIZE=1 -g3 get_next_line.c get_next_line_utils.c main.c -o test_gnl
 ./test_gnl
 
-### Test with large BUFFER_SIZE
-cc -Wall -Wextra -Werror -D BUFFER_SIZE=1000000 get_next_line.c get_next_line_utils.c main.c -o test_gnl
+cc -Wall -Wextra -Werror -D BUFFER_SIZE=10000 -g3 get_next_line.c get_next_line_utils.c main.c -o test_gnl
 ./test_gnl
 
-### Memory Leak Check:
-
+# 2. CRITICAL: Run with valgrind to detect memory leaks
 valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ./test_gnl
+
+# 3. Stricter valgrind check
+valgrind --leak-check=full --show-leak-kinds=all --errors-for-leak-kinds=definite,indirect --error-exitcode=1 ./test_gnl
+
